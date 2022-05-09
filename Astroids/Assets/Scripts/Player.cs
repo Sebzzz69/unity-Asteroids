@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public Bullet bulletPrefab;
+
     public float thrustSpeed = 1.0f;
     public float turnSpeed = 1.0f;
 
     private Rigidbody2D rigidbody2d;
+
     private bool _thrusting;
+
     private float _turnDirection;
 
 
@@ -27,6 +31,11 @@ public class Player : MonoBehaviour
         {
             _turnDirection = 0.0f;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            Shoot();    
+        }
     }
 
     private void FixedUpdate()
@@ -37,8 +46,14 @@ public class Player : MonoBehaviour
         }
         if (_turnDirection != 0.0f)
         {
-            rigidbody2d.AddTorque(_turnDirection * this.turnSpeed);
+            rigidbody2d.AddTorque(_turnDirection * this.turnSpeed); 
         }
+    }
+
+    private void Shoot()
+    {
+        Bullet bullet = Instantiate(this.bulletPrefab, this.transform.position, this.transform.rotation);
+        bullet.Project(this.transform.up);
     }
 
 }
