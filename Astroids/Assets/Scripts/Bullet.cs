@@ -1,4 +1,5 @@
 using Unity.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -15,6 +16,7 @@ public class Bullet : MonoBehaviour
 
     public void Project(Vector2 direction)
     {
+        //Handling bullet moving
         _rigidbody.AddForce(direction * this.speed);
 
         Destroy(this.gameObject, this.maxLifeTime);

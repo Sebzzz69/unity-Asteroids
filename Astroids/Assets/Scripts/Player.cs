@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        //Checking and implementing input controlls for Player
         _thrusting = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Handeling movement and rotation
         if (_thrusting)
         {
             rigidbody2d.AddForce(this.transform.up * this.thrustSpeed);
