@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
     }
+
     private void Update()
     {
         //Checking and implementing input controlls for Player
@@ -56,6 +57,24 @@ public class Player : MonoBehaviour
     {
         Bullet bullet = Instantiate(this.bulletPrefab, this.transform.position, this.transform.rotation);
         bullet.Project(this.transform.up);
+    }
+
+    private void PlayerDeath()
+    {
+        rigidbody2d.velocity = Vector3.zero;
+        rigidbody2d.angularVelocity = 0.0f;
+
+        this.gameObject.SetActive(false);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Asteroid"))
+        {
+            PlayerDeath();
+        }
+
+        FindObjectOfType<GameManager>().PlayerDied();
     }
 
 }
