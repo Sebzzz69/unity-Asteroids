@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    #region Variables
     public Sprite[] sprites;
 
     public float size = 1.0f;
@@ -13,7 +14,7 @@ public class Asteroid : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     private Rigidbody2D _rigidbody;
-
+    #endregion
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();

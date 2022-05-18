@@ -4,7 +4,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    #region Variables
     public Player player;
+    public GameOverScreen GameOverScreen;
 
     public ParticleSystem explotion;
 
@@ -18,8 +20,8 @@ public class GameManager : MonoBehaviour
 
     public int currentLives = 3;
     public int currentScore;
-
-
+    #endregion
+        
     private void Start()
     {
         _gameOver = false;
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour
     {
         this.explotion.transform.position = this.player.transform.position;
         this.explotion.Play();
+
 
         this.currentLives--;
         lifeText.text = "x " + currentLives;
@@ -99,28 +102,34 @@ public class GameManager : MonoBehaviour
         this.player.shouldShoot = true;
     }
 
+    //private void GameOver()
+    //{
+    //    _gameOver = true;
+
+    //    if (_gameOver)
+    //    {
+    //        var asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+    //        foreach (var asteroid in asteroids)
+    //        {
+    //            Destroy(asteroid);
+    //        }
+    //    }
+
+    //    this.currentLives = 3;
+    //    lifeText.text = "x " + currentLives;
+
+    //    this.currentScore = 0;
+    //    HandleScore();
+
+    //    Invoke(nameof(Respawn), respawnTime);
+    //    ReloadScene();
+        
+    //}
+
     private void GameOver()
     {
-        _gameOver = true;
-
-        if (_gameOver)
-        {
-            var asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
-            foreach (var asteroid in asteroids)
-            {
-                Destroy(asteroid);
-            }
-        }
-
-        this.currentLives = 3;
-        lifeText.text = "x " + currentLives;
-
-        this.currentScore = 0;
-        HandleScore();
-
-        Invoke(nameof(Respawn), respawnTime);
-        //ReloadScene();
-        
+        GameOverScreen.Setup(currentScore);
     }
+
 
 }

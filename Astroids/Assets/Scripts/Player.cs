@@ -2,18 +2,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    #region Variables
     public Bullet bulletPrefab;
+
+   // public GameManager gameManager;
 
     public float thrustSpeed = 1.0f;
     public float turnSpeed = 1.0f;
 
     private Rigidbody2D rigidbody2d;
 
+    public AudioSource audioSource; 
+    public AudioClip playerDeath, shoot, hitAsteroyd; 
+
     private bool _thrusting;
     public bool shouldShoot = true;
 
     private float _turnDirection;
-
+    #endregion
 
     private void Awake()
     {
@@ -60,14 +66,17 @@ public class Player : MonoBehaviour
         {
             Bullet bullet = Instantiate(this.bulletPrefab, this.transform.position, this.transform.rotation);
             bullet.Project(this.transform.up);
+
+            this.audioSource.PlayOneShot(shoot);
         }
-        
     }
 
     private void PlayerDeath()
     {
         rigidbody2d.velocity = Vector3.zero;
         rigidbody2d.angularVelocity = 0.0f;
+
+        this.audioSource.PlayOneShot(playerDeath);
 
         this.gameObject.SetActive(false);
     }

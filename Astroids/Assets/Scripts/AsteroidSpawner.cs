@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
+    #region Variables
     public Asteroid asteroidPrefab;
 
     public float trajectoryVariance = 15.0f;
     public float spawnRate = 2.0f;
     public float spawnDistance = 15.0f;
     public int spawnAmount = 1;
-
+    #endregion
     private void Start()
     {
         InvokeRepeating(nameof(Spawn), this.spawnRate, this.spawnRate);
