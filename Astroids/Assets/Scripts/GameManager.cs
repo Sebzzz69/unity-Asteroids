@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
 
         lifeText.text = "x " + currentLives;
 
-        DontDestroyOnLoad(this.gameObject);
     }
 
 
@@ -75,11 +74,6 @@ public class GameManager : MonoBehaviour
     {
         scoreText.text = "" + currentScore;
     }
-
-    //private void ReloadScene()
-    //{
-    //    SceneManager.LoadScene("Asteroids");
-    //}
 
     private void Respawn()
     {
