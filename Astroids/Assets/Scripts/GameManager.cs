@@ -16,10 +16,11 @@ public class GameManager : MonoBehaviour
     private bool _gameOver;
 
     public float respawnTime = 3.0f;
-    public float respawnInvunlnerabilityTime = 3.0f;
+    public float respawnInvulnerabilityTime = 3.0f;
 
     public int currentLives = 3;
     public int currentScore;
+    public int resetScore = 0;
     #endregion
         
     private void Start()
@@ -31,6 +32,15 @@ public class GameManager : MonoBehaviour
 
         lifeText.text = "x " + currentLives;
 
+    }
+
+    private void Update()
+    {
+        // Resets Highscore
+        if (Input.GetKey(KeyCode.L))
+        {
+            PlayerPrefs.SetInt("highscore", resetScore);
+        }
     }
 
 
@@ -57,7 +67,6 @@ public class GameManager : MonoBehaviour
         this.explotion.transform.position = this.player.transform.position;
         this.explotion.Play();
 
-
         this.currentLives--;
         lifeText.text = "x " + currentLives;
 
@@ -77,13 +86,15 @@ public class GameManager : MonoBehaviour
 
     private void Respawn()
     {
+        // Reset values of "Player" to respawn
         this.player.transform.position = Vector3.zero;
         this.player.gameObject.layer = LayerMask.NameToLayer("Ignore Collisions");
         this.player.gameObject.SetActive(true);
         this.player.shouldShoot = false;
 
-        Invoke(nameof(TurnOnShoot), respawnInvunlnerabilityTime);
-        Invoke(nameof(TurnOnCollisions), respawnInvunlnerabilityTime);
+        //Invun
+        Invoke(nameof(TurnOnShoot), respawnInvulnerabilityTime);
+        Invoke(nameof(TurnOnCollisions), respawnInvulnerabilityTime);
     }
 
     private void TurnOnCollisions()
@@ -122,6 +133,10 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        if (currentScore > PlayerPrefs.GetInt("highscore"))
+        {
+            PlayerPrefs.SetInt("highscore", currentScore);
+        }
         GameOverScreen.Setup(currentScore);
     }
 

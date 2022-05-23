@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
         {
             Shoot();    
         }
+
     }
 
     private void FixedUpdate()

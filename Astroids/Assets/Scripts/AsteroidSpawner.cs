@@ -20,7 +20,7 @@ public class AsteroidSpawner : MonoBehaviour
         
         for (int i = 0; i < this.spawnAmount; i++)
         {
-            //Randomize the spawnpoint and direction of an Asteroid
+            // Randomize the spawnpoint and direction, mass and size of an Asteroid when creating one. 
             Vector3 spawnDirection = Random.insideUnitCircle.normalized * spawnDistance;
             Vector3 spawnPoint = this.transform.position + spawnDirection;
 

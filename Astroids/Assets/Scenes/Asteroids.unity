@@ -6190,7 +6190,7 @@ MonoBehaviour:
   scoreText: {fileID: 330783104}
   lifeText: {fileID: 1630130467}
   respawnTime: 3
-  respawnInvunlnerabilityTime: 3
+  respawnInvulnerabilityTime: 3
   currentLives: 3
   currentScore: 0
 --- !u!4 &1621654307
