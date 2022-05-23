@@ -133,10 +133,13 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        // If the "currentScore" is greater than "highscore", then current score
+        // will become the highscore. It's being saved as "PlayerPrefs"
         if (currentScore > PlayerPrefs.GetInt("highscore"))
         {
             PlayerPrefs.SetInt("highscore", currentScore);
         }
+
         GameOverScreen.Setup(currentScore);
     }
 

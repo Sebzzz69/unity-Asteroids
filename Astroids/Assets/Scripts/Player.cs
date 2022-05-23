@@ -63,13 +63,17 @@ public class Player : MonoBehaviour
 
     private void Shoot()
     {
-        if (shouldShoot)
+        if (PauseMenu.gameIsPaused == false)
         {
-            Bullet bullet = Instantiate(this.bulletPrefab, this.transform.position, this.transform.rotation);
-            bullet.Project(this.transform.up);
+            if (shouldShoot)
+            {
+                Bullet bullet = Instantiate(this.bulletPrefab, this.transform.position, this.transform.rotation);
+                bullet.Project(this.transform.up);
 
-            this.audioSource.PlayOneShot(shoot);
+                this.audioSource.PlayOneShot(shoot);
+            }
         }
+        
     }
 
     private void PlayerDeath()

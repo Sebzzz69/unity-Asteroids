@@ -17,6 +17,7 @@ public class GameOverScreen : MonoBehaviour
 
     public void Setup(int score)
     {
+        // Activating the Gameover screen and shows score
         gameObject.SetActive(true);
         this.scoreText.text = score.ToString() + " POINTS";
         this.highscoreText.text = "HIGHSCORE: " + PlayerPrefs.GetInt("highscore");
@@ -25,11 +26,6 @@ public class GameOverScreen : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene("Asteroids");
-    }
-
-    public void ExitGame()
-    {
-        // TODO
     }
 
 }
