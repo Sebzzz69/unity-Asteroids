@@ -11,11 +11,6 @@ public class AsteroidSpawner : MonoBehaviour
     public int spawnAmount = 1;
     #endregion
 
-
-    private void Update()
-    {
-    }
-
     private void Start()
     {
         InvokeRepeating(nameof(Spawn), this.spawnRate, this.spawnRate);

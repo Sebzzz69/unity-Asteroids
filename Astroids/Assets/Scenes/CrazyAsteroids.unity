@@ -908,7 +908,7 @@ RectTransform:
   m_GameObject: {fileID: 151333867}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 464451014}
   - {fileID: 401850261}
@@ -2869,7 +2869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1103545787
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8178,16 +8178,13 @@ MonoBehaviour:
   player: {fileID: 141913816}
   asteroidspawner: {fileID: 912242213}
   GameOverScreen: {fileID: 1103545790}
-  _playOptions: {fileID: 0}
   explotion: {fileID: 1345606219}
   scoreText: {fileID: 330783104}
   lifeText: {fileID: 1630130467}
-  crazyAsteroids: 0
   respawnTime: 3
   respawnInvulnerabilityTime: 3
   currentLives: 3
   currentScore: 0
-  currentScoreCrazy: 0
 --- !u!4 &1621654307
 Transform:
   m_ObjectHideFlags: 0
@@ -8668,7 +8665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2042457155
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8678,7 +8675,7 @@ RectTransform:
   m_GameObject: {fileID: 2042457154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1103545787}
   m_Father: {fileID: 63460438}

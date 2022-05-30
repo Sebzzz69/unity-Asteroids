@@ -8,58 +8,88 @@ public class GameManager : MonoBehaviour
     public Player player;
     public AsteroidSpawner asteroidspawner;
     public GameOverScreen GameOverScreen;
+    public PlayOptions _playOptions;
 
     public ParticleSystem explotion;
 
     public Text scoreText;
     public Text lifeText;
 
-    private bool _gameOver = false;
+    public bool crazyAsteroids;
 
     public float respawnTime = 3.0f;
     public float respawnInvulnerabilityTime = 3.0f;
 
     public int currentLives = 3;
     public int currentScore;
-    public static int resetScore = 0;
+    public int currentScoreCrazy;
     #endregion
         
     private void Start()
     {
-        _gameOver = false;
 
-        currentScore = 0;
-        currentLives = 3;
+        // Create a temporary reference to the current scene.
+        Scene currentScene = SceneManager.GetActiveScene();
 
-        lifeText.text = "x " + currentLives;
+        // Retrieve the name of this scene. 
+        string sceneName = currentScene.name;
+
+
+        // Sets a boolean to determine whether gamemode "Crazy Asteroids" is 
+        // Active or not depending on which scene is active. 
+        if (sceneName == "Asteroids")
+        {
+            this.crazyAsteroids = false;
+        }
+        else if (sceneName == "CrazyAsteroids")
+        {
+            this.crazyAsteroids = true;
+        }
+
+        // Resets score and lives
+        this.currentScore = 0;
+        this.currentScoreCrazy = 0;
+        this.currentLives = 3;
+
+        // Updates Lives to 3 
+        this.lifeText.text = "x " + currentLives;
 
     }
 
     private void Update()
     {
-        // Resets Highscore
-        if (Input.GetKey(KeyCode.L))
+
+        if (crazyAsteroids == true)
         {
-            PlayerPrefs.SetInt("highscore", resetScore);
+            this.asteroidspawner.spawnRate = 0.2f;
+            this.asteroidspawner.spawnAmount = 5;
         }
 
-        // Spawning more asteroids after a set amount of score
-        if (currentScore > 1000)
+        // If the boolean is true.
+        if (!crazyAsteroids)
         {
-            asteroidspawner.spawnRate = 1.0f;
+            // Spawning more asteroids after a set amount of score.
+            if (currentScore > 1000)
+            {
+                this.asteroidspawner.spawnRate = 1.0f;
+            } else if (currentScore > 1500)
+            {
+                this.asteroidspawner.spawnRate = 0.5f;
+            } else if (currentScore > 2000)
+            {
+                this.asteroidspawner.spawnRate = 0.3f;
+                this.asteroidspawner.spawnAmount = 2;
+            } else if (currentScore > 3000)
+            {
+                this.asteroidspawner.spawnRate = 0.3f;
+                this.asteroidspawner.spawnAmount = 3;
+            } else if (currentScore > 10000)
+            {
+                this.asteroidspawner.spawnRate = 0.6f;
+                this.asteroidspawner.spawnAmount = 3;
+            }
         }
-        if (currentScore > 1500)
-        {
-            asteroidspawner.spawnRate = 0.5f;
-        }
-        if (currentScore > 2000)
-        {
-            asteroidspawner.spawnRate = 0.3f;
-        }
-        if (currentScore > 3000)
-        {
-            asteroidspawner.spawnRate = 0.2f;
-        }
+        
     }
 
 
@@ -87,7 +117,7 @@ public class GameManager : MonoBehaviour
         this.explotion.Play();
 
         this.currentLives--;
-        lifeText.text = "x " + currentLives;
+       this.lifeText.text = "x " + this.currentLives;
 
         if (this.currentLives <= 0){
             GameOver();
@@ -100,7 +130,14 @@ public class GameManager : MonoBehaviour
 
     private void HandleScore()
     {
-        scoreText.text = "" + currentScore;
+        if (this.crazyAsteroids)
+        {
+            this.currentScoreCrazy = this.currentScore / 3;
+            this.currentScoreCrazy = this.currentScoreCrazy * 2;
+        }
+
+        // Updates score when this funtion is called.
+        this.scoreText.text = "" + this.currentScore;
     }
 
     private void Respawn()
@@ -111,7 +148,7 @@ public class GameManager : MonoBehaviour
         this.player.gameObject.SetActive(true);
         this.player.shouldShoot = false;
 
-        //Invun
+        // 2 functions gets called when the player respawns after a set amount of seconds. 
         Invoke(nameof(TurnOnShoot), respawnInvulnerabilityTime);
         Invoke(nameof(TurnOnCollisions), respawnInvulnerabilityTime);
     }
@@ -126,37 +163,24 @@ public class GameManager : MonoBehaviour
         this.player.shouldShoot = true;
     }
 
-    //private void GameOver()
-    //{
-    //    _gameOver = true;
-
-    //    if (_gameOver)
-    //    {
-    //        var asteroids = GameObject.FindGameObjectsWithTag("Asteroid");
-    //        foreach (var asteroid in asteroids)
-    //        {
-    //            Destroy(asteroid);
-    //        }
-    //    }
-
-    //    this.currentLives = 3;
-    //    lifeText.text = "x " + currentLives;
-
-    //    this.currentScore = 0;
-    //    HandleScore();
-
-    //    Invoke(nameof(Respawn), respawnTime);
-    //    ReloadScene();
-        
-    //}
-
     private void GameOver()
     {
         // If the "currentScore" is greater than "highscore", then current score
         // will become the highscore. It's being saved as "PlayerPrefs"
-        if (currentScore > PlayerPrefs.GetInt("highscore"))
+        if (!this.crazyAsteroids)
         {
-            PlayerPrefs.SetInt("highscore", currentScore);
+            if (this.currentScore > PlayerPrefs.GetInt("highscore"))
+            {
+                PlayerPrefs.SetInt("highscore", this.currentScore);
+            }
+        }
+        // Does the same thing here except in the Crazy Gamemode.
+        if (this.crazyAsteroids)
+        {
+            if (this.currentScoreCrazy > PlayerPrefs.GetInt("CrazyHighscore"))
+            {
+                PlayerPrefs.SetInt("CrazyHighscore", this.currentScoreCrazy);
+            }
         }
 
         GameOverScreen.Setup(currentScore);
