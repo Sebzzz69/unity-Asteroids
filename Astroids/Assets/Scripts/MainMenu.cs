@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class MainMenu : MonoBehaviour
@@ -7,9 +8,11 @@ public class MainMenu : MonoBehaviour
     public GameObject Main;
     public GameObject optionsMenu;
 
+    public Text highscoreText;
+
     public void Play()
     {
-        SceneManager.LoadScene("Asteroids");
+        SceneManager.LoadScene("PlayOptions");
     }
 
     public void Options()

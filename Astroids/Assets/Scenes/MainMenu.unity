@@ -726,6 +726,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Main: {fileID: 2074336671}
   optionsMenu: {fileID: 761356288}
+  highscoreText: {fileID: 0}
 --- !u!1 &820759359
 GameObject:
   m_ObjectHideFlags: 0
