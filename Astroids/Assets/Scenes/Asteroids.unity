@@ -8178,6 +8178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 141913816}
+  asteroidspawner: {fileID: 912242213}
   GameOverScreen: {fileID: 1103545790}
   explotion: {fileID: 1345606219}
   scoreText: {fileID: 330783104}
@@ -8186,7 +8187,6 @@ MonoBehaviour:
   respawnInvulnerabilityTime: 3
   currentLives: 3
   currentScore: 0
-  resetScore: 0
 --- !u!4 &1621654307
 Transform:
   m_ObjectHideFlags: 0
@@ -8590,7 +8590,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1979537119
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8643,7 +8643,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press Space Or Enter To Play Again
+  m_Text: Press Backspace Or Enter To Play Again
 --- !u!222 &1979537121
 CanvasRenderer:
   m_ObjectHideFlags: 0

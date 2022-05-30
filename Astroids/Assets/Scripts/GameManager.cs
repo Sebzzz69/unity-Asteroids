@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     #region Variables
     public Player player;
+    public AsteroidSpawner asteroidspawner;
     public GameOverScreen GameOverScreen;
 
     public ParticleSystem explotion;
@@ -13,14 +14,14 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public Text lifeText;
 
-    private bool _gameOver;
+    private bool _gameOver = false;
 
     public float respawnTime = 3.0f;
     public float respawnInvulnerabilityTime = 3.0f;
 
     public int currentLives = 3;
     public int currentScore;
-    public int resetScore = 0;
+    public static int resetScore = 0;
     #endregion
         
     private void Start()
@@ -40,6 +41,24 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.L))
         {
             PlayerPrefs.SetInt("highscore", resetScore);
+        }
+
+        // Spawning more asteroids after a set amount of score
+        if (currentScore > 1000)
+        {
+            asteroidspawner.spawnRate = 1.0f;
+        }
+        if (currentScore > 1500)
+        {
+            asteroidspawner.spawnRate = 0.5f;
+        }
+        if (currentScore > 2000)
+        {
+            asteroidspawner.spawnRate = 0.3f;
+        }
+        if (currentScore > 3000)
+        {
+            asteroidspawner.spawnRate = 0.2f;
         }
     }
 

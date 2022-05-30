@@ -10,6 +10,12 @@ public class AsteroidSpawner : MonoBehaviour
     public float spawnDistance = 15.0f;
     public int spawnAmount = 1;
     #endregion
+
+
+    private void Update()
+    {
+    }
+
     private void Start()
     {
         InvokeRepeating(nameof(Spawn), this.spawnRate, this.spawnRate);
@@ -23,6 +29,7 @@ public class AsteroidSpawner : MonoBehaviour
             // Randomize the spawnpoint and direction, mass and size of an Asteroid when creating one. 
             Vector3 spawnDirection = Random.insideUnitCircle.normalized * spawnDistance;
             Vector3 spawnPoint = this.transform.position + spawnDirection;
+            
 
             float variance = Random.Range(-this.trajectoryVariance, this.trajectoryVariance);
             Quaternion rotation = Quaternion.AngleAxis(variance, Vector3.forward);
