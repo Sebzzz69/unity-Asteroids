@@ -54,6 +54,11 @@ public class GameManager : MonoBehaviour
         // Updates Lives to 3 
         this.lifeText.text = "x " + currentLives;
 
+        if (crazyAsteroids)
+        {
+            currentScoreCrazy = currentScore;
+        }
+
     }
 
     private void Update()
@@ -130,11 +135,6 @@ public class GameManager : MonoBehaviour
 
     private void HandleScore()
     {
-        if (this.crazyAsteroids)
-        {
-            this.currentScoreCrazy = this.currentScore / 3;
-            this.currentScoreCrazy = this.currentScoreCrazy * 2;
-        }
 
         // Updates score when this funtion is called.
         this.scoreText.text = "" + this.currentScore;
@@ -183,7 +183,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        GameOverScreen.Setup(currentScore);
+        
+            GameOverScreen.Setup(currentScore);
     }
 
 

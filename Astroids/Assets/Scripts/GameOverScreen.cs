@@ -7,6 +7,8 @@ public class GameOverScreen : MonoBehaviour
     public Text scoreText;
     public Text highscoreText;
 
+    public GameManager _gameManager;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Return))
@@ -20,7 +22,10 @@ public class GameOverScreen : MonoBehaviour
         // Activating the Gameover screen and shows score
         gameObject.SetActive(true);
         this.scoreText.text = score.ToString() + " POINTS";
+
         this.highscoreText.text = "HIGHSCORE: " + PlayerPrefs.GetInt("highscore");
+        
+        
     }
 
     public void RestartGame()
